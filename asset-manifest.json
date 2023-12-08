@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pet-grocery-list/static/css/main.7acaea2f.css",
+    "main.js": "/pet-grocery-list/static/js/main.de3111c4.js",
+    "index.html": "/pet-grocery-list/index.html",
+    "main.7acaea2f.css.map": "/pet-grocery-list/static/css/main.7acaea2f.css.map",
+    "main.de3111c4.js.map": "/pet-grocery-list/static/js/main.de3111c4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.de3111c4.js"
+  ]
+}
