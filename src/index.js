@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={{ theme }}>
       <Provider store={store}>
-        <BrowserRouter basename="/pet-grocery-list">
+        <BrowserRouter basename="/MHP-Quality">
           <App />
         </BrowserRouter>
         <GlobalStyle />
