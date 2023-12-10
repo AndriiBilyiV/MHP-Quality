@@ -3,8 +3,8 @@ import {
   getDatabase,
   set,
   get,
-  update,
-  remove,
+  // update,
+  // remove,
   ref,
   child,
 } from 'firebase/database';
@@ -12,8 +12,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
-  signOut,
-  onAuthStateChanged,
+  // signOut,
+  // onAuthStateChanged,
 } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -27,7 +27,7 @@ const firebaseConfig = {
   appId: '1:451738501502:web:4ccae334bfb5a13f24332f',
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 //Розділ запитів аутентифікації
 
