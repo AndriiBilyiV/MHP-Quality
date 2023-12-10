@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { getUsers } from '../redux/operations';
-import { getAllUsers, setUser } from './fareBaseInit';
+import { getAllUsers } from './fareBaseInit';
 import { Layout } from './Layout/Layout.styled';
 import { RedirectIndex } from './RedirectIndex';
 import { RestrictedRoute } from './RestrictedRoute';
