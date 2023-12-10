@@ -1,13 +1,11 @@
 {
   "files": {
-    "main.css": "/pet-grocery-list/static/css/main.7acaea2f.css",
-    "main.js": "/pet-grocery-list/static/js/main.de3111c4.js",
-    "index.html": "/pet-grocery-list/index.html",
-    "main.7acaea2f.css.map": "/pet-grocery-list/static/css/main.7acaea2f.css.map",
-    "main.de3111c4.js.map": "/pet-grocery-list/static/js/main.de3111c4.js.map"
+    "main.js": "/MHP-Quality/static/js/main.b562e3b9.js",
+    "static/media/MHP_logo.png": "/MHP-Quality/static/media/MHP_logo.62cb87b55c054c8964ab.png",
+    "index.html": "/MHP-Quality/index.html",
+    "main.b562e3b9.js.map": "/MHP-Quality/static/js/main.b562e3b9.js.map"
   },
   "entrypoints": [
-    "static/css/main.7acaea2f.css",
-    "static/js/main.de3111c4.js"
+    "static/js/main.b562e3b9.js"
   ]
 }
