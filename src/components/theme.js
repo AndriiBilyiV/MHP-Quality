@@ -5,5 +5,7 @@ export const theme = {
     medium: '#4C8891',
     light: '#A0C8C3',
     lightest: '#ECEBE9',
+    white: 'white',
+    black: 'black',
   },
 };

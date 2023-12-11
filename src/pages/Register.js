@@ -1,6 +1,8 @@
 import { Article } from 'components/Article/Article.styled';
-import { Button } from 'components/Button/Button.styled';
-import { MainTitle } from 'components/Button/Title/Title.styled';
+import {
+  MainTitle,
+  Button,
+} from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
 import { LogoGoogle } from 'components/Logo/Google';
 import { LogoMHPMain } from 'components/Logo/MHP';
 import { useDispatch } from 'react-redux';

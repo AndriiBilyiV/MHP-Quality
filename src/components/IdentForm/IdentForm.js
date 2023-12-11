@@ -1,26 +1,40 @@
 import { Form, Field, Formik } from 'formik';
 import { useAuth } from 'hooks/useAuth';
-import { useDispatch } from 'react-redux';
-import { identifyMe } from '../../redux/operations';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectPositions } from '../../redux/selectors';
+import { getPositions, identifyMe } from '../../redux/operations';
 
 export const IdentForm = () => {
   const dispatch = useDispatch();
-  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { user, userName } = useAuth();
+  useEffect(() => {
+    const foo = async () => await dispatch(getPositions('Legko'));
+    foo();
+  }, [dispatch]);
+  const positions = useSelector(selectPositions);
   return (
     <Formik
       initialValues={{
-        type: '',
+        position: '',
         company: '',
       }}
       onSubmit={(values, action) => {
-        console.log(values);
         const data = {
+          isAdmin: true,
           user: user,
-          type: values.type,
+          userName: userName,
+          position: values.position,
+          positionDisplay: positions.find(
+            position => position.position === values.position
+          ).positionDisplay,
           company: values.company,
         };
         console.log(data);
         dispatch(identifyMe(data));
+        navigate('/home');
       }}
     >
       <Form>
@@ -35,11 +49,15 @@ export const IdentForm = () => {
         </label>
         <label>
           Оберіть Вашу посаду
-          <Field as="select" name="type">
+          <Field as="select" name="position">
             <option value="">Оберіть</option>
-            <option value="inspektor">Інспектор</option>
-            <option value="master">Майстер</option>
-            <option value="komirnik">Комірник</option>
+            {positions.map(position => {
+              return (
+                <option value={position.position}>
+                  {position.positionDisplay}
+                </option>
+              );
+            })}
           </Field>
         </label>
         <button type="submit">OK</button>

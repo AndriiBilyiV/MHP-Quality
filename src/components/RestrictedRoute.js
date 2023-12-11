@@ -4,8 +4,8 @@ import { Register } from 'pages/Register';
 import { Navigate } from 'react-router-dom';
 
 export const RestrictedRoute = ({ redirectTo = '/' }) => {
-  const { isLoggedIn, isIdetify } = useAuth();
-  return isIdetify ? (
+  const { isLoggedIn, isIdentify } = useAuth();
+  return isIdentify ? (
     <Navigate to={redirectTo} />
   ) : isLoggedIn ? (
     <FirstTime />
