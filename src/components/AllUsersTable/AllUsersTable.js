@@ -9,7 +9,7 @@ import { Table } from './AllUsersTable.styled';
 
 export const AllUsersTable = () => {
   const { usersArray } = useAuth();
-  const data = React.useMemo(() => usersArray, []);
+  const data = usersArray;
   const columns = [
     {
       header: "Ім'я",
