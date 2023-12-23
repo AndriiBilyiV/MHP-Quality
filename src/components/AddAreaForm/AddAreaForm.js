@@ -6,8 +6,6 @@ import {
 import { setArea } from 'components/firebase';
 import { Form, Formik } from 'formik';
 import { useAuth } from 'hooks/useAuth';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 export const AddAreaForm = () => {
   const { email, company } = useAuth();
@@ -26,7 +24,6 @@ export const AddAreaForm = () => {
           company: company,
         };
         setArea(data);
-        // navigate('/home');
       }}
     >
       <Form>

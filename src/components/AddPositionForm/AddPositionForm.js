@@ -2,11 +2,10 @@ import {
   Button,
   Input,
   Label,
-  Select,
   StyledForm,
 } from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
 import { setPosition } from 'components/firebase';
-import { Field, Form, Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import { useAuth } from 'hooks/useAuth';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
