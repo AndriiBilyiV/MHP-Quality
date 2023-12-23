@@ -10,3 +10,4 @@ export const selectAdmin = state => state.auth.isAdmin;
 export const selectUsersArray = state => state.auth.usersArray;
 export const selectDepartments = state => state.company.departments;
 export const selectPositions = state => state.company.positions;
+export const selectAreas = state => state.company.areas;

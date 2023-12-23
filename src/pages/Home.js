@@ -1,7 +1,10 @@
 import { UserInfo } from 'components/UserInfo/UserInfo';
 import { HomeLogoLink } from 'components/HomeLogoLink/HomeLogoLink';
 import { useAuth } from 'hooks/useAuth';
-import { OptionLink } from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
+import {
+  OptionLink,
+  OptionLinkAdmin,
+} from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
 
 export const Home = () => {
   const { isAdmin } = useAuth();
@@ -10,17 +13,25 @@ export const Home = () => {
       <HomeLogoLink />
       <UserInfo />
       {isAdmin ? (
-        <OptionLink to="/add-department">Заявки користувачів</OptionLink>
+        <OptionLinkAdmin to="/add-department">
+          Заявки користувачів
+        </OptionLinkAdmin>
       ) : null}
       {isAdmin ? (
-        <OptionLink to="/all-users">Переглянути користувачів</OptionLink>
+        <OptionLinkAdmin to="/all-users">
+          Переглянути користувачів
+        </OptionLinkAdmin>
       ) : null}
       {isAdmin ? (
-        <OptionLink to="/add-department">Додати підрозділ</OptionLink>
+        <OptionLinkAdmin to="/add-department">Додати підрозділ</OptionLinkAdmin>
       ) : null}
       {isAdmin ? (
-        <OptionLink to="/add-position">Додати посаду</OptionLink>
+        <OptionLinkAdmin to="/add-position">Додати посаду</OptionLinkAdmin>
       ) : null}
+      {isAdmin ? (
+        <OptionLinkAdmin to="/add-area">Додати дільницю</OptionLinkAdmin>
+      ) : null}
+      <OptionLink to="/crash">Реєстр крихких предметів</OptionLink>
     </div>
   );
 };

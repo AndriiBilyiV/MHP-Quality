@@ -12,7 +12,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
-  // signOut,
+  signOut,
   // onAuthStateChanged,
 } from 'firebase/auth';
 
@@ -40,7 +40,12 @@ export const userSignIn = async () => {
     .catch(err => err);
   return response;
 };
-
+export const userSignOut = async () => {
+  const response = await signOut()
+    .then()
+    .catch(err => err);
+  console.log(response);
+};
 // Розділ запитів бази даних
 
 const db = getDatabase();
@@ -65,6 +70,10 @@ export const idetifyUser = async data => {
   }
   if (!users.find(user => user.user === data.user)) {
     set(ref(db, 'Users'), [...users, data]);
+
+    return data;
+  } else if (users.find(user => user.user === data.user)) {
+    return data;
   }
 };
 export const getAllDepartments = async company => {
@@ -103,5 +112,20 @@ export const setPosition = async data => {
     )
   ) {
     set(ref(db, `${data.company}/positions`), [...positions, data]);
+  }
+};
+export const getAllAreas = async company => {
+  const areas = await get(child(ref(db), `${company}/areas`))
+    .then(res => res.val())
+    .catch(err => console.log(err));
+  return areas;
+};
+export const setArea = async data => {
+  const areas = await getAllAreas(data.company);
+  if (areas === null) {
+    set(ref(db, `${data.company}/areas`), [data]);
+    return;
+  } else if (!areas.find(area => area.area === data.area)) {
+    set(ref(db, `${data.company}/areas`), [...areas, data]);
   }
 };

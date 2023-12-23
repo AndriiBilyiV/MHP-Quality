@@ -2,8 +2,10 @@ import {
   Button,
   Input,
   Label,
+  Select,
+  StyledForm,
 } from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
-import { setPosition } from 'components/farebase';
+import { setPosition } from 'components/firebase';
 import { Field, Form, Formik } from 'formik';
 import { useAuth } from 'hooks/useAuth';
 import { useEffect } from 'react';
@@ -40,7 +42,7 @@ export const AddPositionForm = () => {
         navigate('/home');
       }}
     >
-      <Form>
+      <StyledForm>
         <Label>
           Оберіть підрозділ майбутньої посади
           <Field as="select" name="department">
@@ -60,10 +62,10 @@ export const AddPositionForm = () => {
         </Label>
         <Label>
           Введіть ключ назви нової посади
-          <Input name="position" placeholder="inspektor" />
+          <Input name="position" placeholder="quality-inspector" />
         </Label>
         <Button>Підтвердити</Button>
-      </Form>
+      </StyledForm>
     </Formik>
   );
 };

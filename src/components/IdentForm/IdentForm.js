@@ -1,10 +1,15 @@
-import { Form, Field, Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import { useAuth } from 'hooks/useAuth';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectPositions } from '../../redux/selectors';
 import { getPositions, identifyMe } from '../../redux/operations';
+import {
+  Button,
+  Label,
+  StyledForm,
+} from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
 
 export const IdentForm = () => {
   const dispatch = useDispatch();
@@ -23,7 +28,7 @@ export const IdentForm = () => {
       }}
       onSubmit={(values, action) => {
         const data = {
-          isAdmin: true,
+          isAdmin: false,
           user: user,
           userName: userName,
           position: values.position,
@@ -32,13 +37,12 @@ export const IdentForm = () => {
           ).positionDisplay,
           company: values.company,
         };
-        console.log(data);
         dispatch(identifyMe(data));
         navigate('/home');
       }}
     >
-      <Form>
-        <label>
+      <StyledForm>
+        <Label>
           Оберіть компанію в якій працюєте
           <Field as="select" name="company">
             <option value="">Оберіть</option>
@@ -46,22 +50,22 @@ export const IdentForm = () => {
             <option value="MPF">МПФ</option>
             <option value="VPF">ВПФ</option>
           </Field>
-        </label>
-        <label>
+        </Label>
+        <Label>
           Оберіть Вашу посаду
           <Field as="select" name="position">
             <option value="">Оберіть</option>
             {positions.map(position => {
               return (
-                <option value={position.position}>
+                <option key={position.position} value={position.position}>
                   {position.positionDisplay}
                 </option>
               );
             })}
           </Field>
-        </label>
-        <button type="submit">OK</button>
-      </Form>
+        </Label>
+        <Button type="submit">OK</Button>
+      </StyledForm>
     </Formik>
   );
 };

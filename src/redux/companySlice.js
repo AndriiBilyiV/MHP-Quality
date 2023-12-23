@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getDepartments, getPositions } from './operations';
+import { getAreas, getDepartments, getPositions } from './operations';
 
 const companySlice = createSlice({
   name: 'company',
   initialState: {
-      departments: [],
-      positions: [],
+    departments: [],
+    positions: [],
+    areas: [],
   },
   extraReducers(builder) {
     builder
@@ -14,6 +15,9 @@ const companySlice = createSlice({
       })
       .addCase(getPositions.fulfilled, (state, action) => {
         state.positions = action.payload;
+      })
+      .addCase(getAreas.fulfilled, (state, action) => {
+        state.areas = action.payload;
       });
   },
 });

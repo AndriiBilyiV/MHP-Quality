@@ -1,13 +1,15 @@
+import { AddArea } from 'pages/AddArea';
 import { AddDepartment } from 'pages/AddDepartment';
 import { AddPosition } from 'pages/AddPosition';
 import { AllUsers } from 'pages/AllUsers';
+import { CheckCrash } from 'pages/CheckCrash';
 import { Home } from 'pages/Home';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { getUsers } from '../redux/operations';
 import { AdminRoute } from './AdminRoute';
-import { getAllUsers } from './farebase';
+import { getAllUsers } from './firebase';
 import { Layout } from './Layout/Layout.styled';
 import { PrivateRoute } from './PrivatRoute';
 import { RedirectIndex } from './RedirectIndex';
@@ -39,6 +41,14 @@ export const App = () => {
         <Route
           path="/add-position"
           element={<AdminRoute component={<AddPosition />} />}
+        />
+        <Route
+          path="/add-area"
+          element={<AdminRoute component={<AddArea />} />}
+        />
+        <Route
+          path="/crash"
+          element={<PrivateRoute component={<CheckCrash />} />}
         />
       </Routes>
     </Layout>

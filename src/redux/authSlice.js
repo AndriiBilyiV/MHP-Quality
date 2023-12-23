@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUsers, signIn } from './operations';
+import { getUsers, identifyMe, signIn, signOut } from './operations';
 
 const authSlice = createSlice({
   name: 'auth',
@@ -45,6 +45,26 @@ const authSlice = createSlice({
             }
           }
         }
+      })
+      .addCase(identifyMe.fulfilled, (state, action) => {
+        if (state.usersArray !== null) {
+          state.isIdentify = true;
+          state.position = action.payload.position;
+          state.positionDisplay = action.payload.positionDisplay;
+          state.company = action.payload.company;
+        }
+      })
+      .addCase(signOut.fulfilled, (state, action) => {
+        state.isIdentify = false;
+        state.isAdmin = false;
+        state.isLoggedIn = false;
+        state.user = '';
+        state.UID = '';
+        state.company = '';
+        state.position = '';
+        state.positionDisplay = '';
+        state.email = '';
+        // state.usersArray = [];
       })
       .addCase(getUsers.fulfilled, (state, action) => {
         state.usersArray = action.payload;

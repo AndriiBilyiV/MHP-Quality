@@ -3,10 +3,24 @@ import {
   Input,
   Label,
 } from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
-import { setDepartment } from 'components/farebase';
+import { setDepartment } from 'components/firebase';
 import { Form, Formik } from 'formik';
 import { useAuth } from 'hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+  department: Yup.string()
+    .min(3, 'Мінімум 3 символи')
+    .matches(
+      /^[a-zA-Z-]+$/,
+      'Допускаються тільки букви латинського алфавіту та дефізи'
+    )
+    .required("Обов'язково заповнити"),
+  departmentDisplay: Yup.string()
+    .min(3, 'Мінімум 3 символи')
+    .required("Обов'язково заповнити"),
+});
 
 export const AddDepartmentForm = () => {
   const { email, company } = useAuth();
@@ -17,6 +31,7 @@ export const AddDepartmentForm = () => {
         department: '',
         departmentDisplay: '',
       }}
+      validationSchema={validationSchema}
       onSubmit={(values, action) => {
         const data = {
           department: values.department,

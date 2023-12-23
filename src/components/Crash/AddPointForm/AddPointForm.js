@@ -4,16 +4,17 @@ export const AddPointForm = () => {
   return (
     <Formik
       initialValues={{
-        name: '',
-        position: '',
+        area: '',
+        point: '',
       }}
       onSubmit={(values, action) => {}}
     >
       <Form>
         <label>
-          <Field name="name" />
+          <Field name="area" />
+          <label></label>
+          <Field name="point" />
         </label>
-        {}
       </Form>
     </Formik>
   );

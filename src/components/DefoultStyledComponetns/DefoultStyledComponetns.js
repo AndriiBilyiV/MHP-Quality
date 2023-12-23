@@ -1,4 +1,4 @@
-import { Field } from 'formik';
+import { Field, Form } from 'formik';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
@@ -26,6 +26,24 @@ export const Input = styled(Field)`
   }
 `;
 export const CheckBox = styled(Field)``;
+export const StyledForm = styled(Form)`
+  select {
+    color: black;
+    outline: transparent;
+    width: 87%;
+    font-size: 18px;
+    padding: 8px;
+    margin: 18px 0;
+    transition: outline 200ms linear;
+  }
+  select:focus-visible {
+    outline: ${p => p.theme.theme.colors.medium} 4px solid;
+    transition: outline 200ms linear;
+  }
+  select > option:first-child {
+    color: lightgrey;
+  }
+`;
 
 export const Button = styled.button`
   border: none;
@@ -60,7 +78,24 @@ export const OptionLink = styled(Link)`
   margin: auto;
   transition: background-color 200ms linear;
   &:hover {
-    background-color: ${p => p.theme.theme.colors.medium};
+    background-color: ${p => p.theme.theme.colors.dark};
+    transition: background-color 200ms linear;
+  }
+`;
+export const OptionLinkAdmin = styled(Link)`
+  text-decoration: none;
+  background-color: ${p => p.theme.theme.colors.medium};
+  padding: 18px;
+  color: ${p => p.theme.theme.colors.lightest};
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  margin: auto;
+  transition: background-color 200ms linear;
+  &:hover {
+    background-color: ${p => p.theme.theme.colors.dark};
     transition: background-color 200ms linear;
   }
 `;
