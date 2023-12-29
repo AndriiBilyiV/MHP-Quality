@@ -3,7 +3,7 @@ import {
   Input,
   StyledForm,
 } from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
-import { Field, Form, Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAreas } from '../../../redux/selectors';
 import { nanoid } from 'nanoid';
