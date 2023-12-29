@@ -1,3 +1,7 @@
 export const CrashItem = ({ area }) => {
-  return <div>{area.areaDisplay}</div>;
+  return (
+    <div>
+      <span>{area.areaDisplay}</span>
+    </div>
+  );
 };

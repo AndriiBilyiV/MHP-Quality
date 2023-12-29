@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getAreas, getDepartments, getPositions } from './operations';
+import {
+  getAreas,
+  getCrashPoints,
+  getDepartments,
+  getPositions,
+  setNewPoint,
+} from './operations';
 
 const companySlice = createSlice({
   name: 'company',
@@ -7,6 +13,7 @@ const companySlice = createSlice({
     departments: [],
     positions: [],
     areas: [],
+    crashPoints: [],
   },
   extraReducers(builder) {
     builder
@@ -18,6 +25,12 @@ const companySlice = createSlice({
       })
       .addCase(getAreas.fulfilled, (state, action) => {
         state.areas = action.payload;
+      })
+      .addCase(getCrashPoints.fulfilled, (state, action) => {
+        state.crashPoints = action.payload;
+      })
+      .addCase(setNewPoint.fulfilled, (state, action) => {
+        state.crashPoints = action.payload;
       });
   },
 });

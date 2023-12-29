@@ -57,9 +57,6 @@ export const getAllUsers = async () => {
   return users;
 };
 
-export const insertDataPoit = data => {
-  set(ref(db, 'Legko/crash/poins'), data);
-};
 export const insertDataRecord = data => {
   set(ref(db, 'Legko/crash/records'), data);
 };
@@ -127,5 +124,20 @@ export const setArea = async data => {
     return;
   } else if (!areas.find(area => area.area === data.area)) {
     set(ref(db, `${data.company}/areas`), [...areas, data]);
+  }
+};
+export const getAllCrashPoints = async company => {
+  const points = await get(child(ref(db), `${company}/crash/poins`))
+    .then(res => res.val())
+    .catch(err => console.log(err));
+  return points;
+};
+export const setCrashPoint = async data => {
+  const points = await getAllCrashPoints(data.company);
+  if (points === null) {
+    set(ref(db, `${data.company}/crash/poins`), [data]);
+    return;
+  } else if (true /*Додати перевірку унікальності*/) {
+    set(ref(db, `${data.company}/crash/poins`), [...points, data]);
   }
 };
