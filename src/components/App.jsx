@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { getUsers } from '../redux/operations';
 import { AdminRoute } from './AdminRoute';
+import { CrashTable } from './Crash/CrashForm/CrashTable';
 import { getAllUsers } from './firebase';
 import { Layout } from './Layout/Layout.styled';
 import { PrivateRoute } from './PrivatRoute';
@@ -49,6 +50,10 @@ export const App = () => {
         <Route
           path="/crash"
           element={<PrivateRoute component={<CheckCrash />} />}
+        />
+        <Route
+          path="/crash/table"
+          element={<PrivateRoute component={<CrashTable />} />}
         />
       </Routes>
     </Layout>

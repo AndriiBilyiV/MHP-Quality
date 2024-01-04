@@ -32,6 +32,9 @@ export const Home = () => {
         <OptionLinkAdmin to="/add-area">Додати дільницю</OptionLinkAdmin>
       ) : null}
       <OptionLink to="/crash">Реєстр крихких предметів</OptionLink>
+      <OptionLink to="/crash/table">
+        Таблиця записів крихких предметів
+      </OptionLink>
     </div>
   );
 };

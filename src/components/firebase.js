@@ -141,3 +141,32 @@ export const setCrashPoint = async data => {
     set(ref(db, `${data.company}/crash/poins`), [...points, data]);
   }
 };
+export const setCrashRecord = data => {
+  set(
+    ref(
+      db,
+      `Legko/crash/records/${data.year}/${data.month}/${data.id}/` + data.day
+    ),
+    data.status
+  );
+  set(
+    ref(db, `Legko/crash/records/${data.year}/${data.month}/${data.id}/area`),
+    data.area
+  );
+  set(
+    ref(
+      db,
+      `Legko/crash/records/${data.year}/${data.month}/${data.id}/display`
+    ),
+    data.display
+  );
+};
+
+export const getRecords = async ({ year, month }) => {
+  const records = await get(
+    child(ref(db), `Legko/crash/records/${year}/${month}`)
+  )
+    .then(res => res.val())
+    .catch(err => console.log(err));
+  return records;
+};
