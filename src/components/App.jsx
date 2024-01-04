@@ -3,13 +3,13 @@ import { AddDepartment } from 'pages/AddDepartment';
 import { AddPosition } from 'pages/AddPosition';
 import { AllUsers } from 'pages/AllUsers';
 import { CheckCrash } from 'pages/CheckCrash';
+import { CrashView } from 'pages/CrasfView';
 import { Home } from 'pages/Home';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { getUsers } from '../redux/operations';
 import { AdminRoute } from './AdminRoute';
-import { CrashTable } from './Crash/CrashForm/CrashTable';
 import { getAllUsers } from './firebase';
 import { Layout } from './Layout/Layout.styled';
 import { PrivateRoute } from './PrivatRoute';
@@ -53,7 +53,7 @@ export const App = () => {
         />
         <Route
           path="/crash/table"
-          element={<PrivateRoute component={<CrashTable />} />}
+          element={<PrivateRoute component={<CrashView />} />}
         />
       </Routes>
     </Layout>

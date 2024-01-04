@@ -5,8 +5,21 @@ import {
 } from '@tanstack/react-table';
 import { getRecords } from 'components/firebase';
 import React, { useEffect, useState } from 'react';
+import { Broken, Unhurt } from './Check';
 import { Table } from './CrashTable.styled';
 
+export const changeCellView = value => {
+  switch (value) {
+    case 'unhurt':
+      return <Unhurt />;
+    case 'broken':
+      return <Broken />;
+    case 'unchecked':
+      return;
+    default:
+      return value;
+  }
+};
 export const CrashTable = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -76,7 +89,7 @@ export const CrashTable = () => {
             <tr key={row.id}>
               {row.getVisibleCells().map(cell => (
                 <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  {changeCellView(cell.getContext().getValue())}
                 </td>
               ))}
             </tr>
