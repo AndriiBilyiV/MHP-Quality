@@ -33,7 +33,7 @@ export const CrashForm = () => {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
-    const day = date.getDate() + 1;
+    const day = date.getDate();
     const stateArray = Object.entries(crashState);
     for (let point of stateArray) {
       const data = {
