@@ -21,12 +21,16 @@ export const AddPointForm = () => {
         point: '',
       }}
       onSubmit={(values, action) => {
+        const val = JSON.parse(values);
+        console.log(values);
+        console.log(val);
         const data = {
-          area: values.area,
-          point: values.point,
+          area: val.area[0],
+          point: val.point,
           id: nanoid(),
           redactor: email,
           company: company,
+          areaDisplay: val.area[1],
         };
         dispatch(setNewPoint(data));
       }}
@@ -39,7 +43,10 @@ export const AddPointForm = () => {
             <option value="">Оберіть</option>
             {areas.map(area => {
               return (
-                <option key={area.area} value={area.area}>
+                <option
+                  key={area.area}
+                  value={JSON.stringify([area.area, area.areaDisplay])}
+                >
                   {area.areaDisplay}
                 </option>
               );

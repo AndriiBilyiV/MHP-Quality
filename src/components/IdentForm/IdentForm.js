@@ -29,6 +29,7 @@ export const IdentForm = () => {
       onSubmit={(values, action) => {
         const data = {
           isAdmin: false,
+          isAproved: false,
           user: user,
           userName: userName,
           position: values.position,

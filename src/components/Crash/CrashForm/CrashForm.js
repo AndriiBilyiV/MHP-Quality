@@ -16,7 +16,7 @@ export const CrashForm = () => {
     });
   };
   const dispatch = useDispatch();
-  const { company } = useAuth();
+  const { company, userPositionDisplay, userName } = useAuth();
   useEffect(() => {
     const foo = async () => {
       await dispatch(getCrashPoints(company));
@@ -34,6 +34,8 @@ export const CrashForm = () => {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
+    const hour = date.getHours();
+    const minute = date.getMinutes();
     const stateArray = Object.entries(crashState);
     for (let point of stateArray) {
       const data = {
@@ -44,6 +46,9 @@ export const CrashForm = () => {
         status: point[1].status,
         area: point[1].area,
         display: point[1].display,
+        date: `${day}.${month}.${year}`,
+        time: `${hour}:${minute}`,
+        redactor: { name: userName, position: userPositionDisplay },
       };
       setCrashRecord(data);
     }
@@ -55,6 +60,7 @@ export const CrashForm = () => {
           <li key={area.area}>
             <CrashItem key={area.area + 'label'} area={area} />
             <ul>
+              {console.log(points)}
               {points
                 .filter(point => point.area === area.area)
                 .map(point => (

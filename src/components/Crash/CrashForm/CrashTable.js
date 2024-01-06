@@ -5,19 +5,14 @@ import {
 } from '@tanstack/react-table';
 import { getRecords } from 'components/firebase';
 import React, { useEffect, useState } from 'react';
-import { Broken, Unhurt } from './Check';
+import { Check } from './Check';
 import { Table } from './CrashTable.styled';
 
 export const changeCellView = value => {
-  switch (value) {
-    case 'unhurt':
-      return <Unhurt />;
-    case 'broken':
-      return <Broken />;
-    case 'unchecked':
-      return;
-    default:
-      return value;
+  if (typeof value === 'object') {
+    return <Check value={value} />;
+  } else {
+    return value;
   }
 };
 export const CrashTable = () => {

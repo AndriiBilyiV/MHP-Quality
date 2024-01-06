@@ -133,13 +133,7 @@ export const getAllCrashPoints = async company => {
   return points;
 };
 export const setCrashPoint = async data => {
-  const points = await getAllCrashPoints(data.company);
-  if (points === null) {
-    set(ref(db, `${data.company}/crash/poins`), [data]);
-    return;
-  } else if (true /*Додати перевірку унікальності*/) {
-    set(ref(db, `${data.company}/crash/poins`), [...points, data]);
-  }
+  set(ref(db, `${data.company}/crash/poins/${data.id}/`), data);
 };
 export const setCrashRecord = data => {
   set(
@@ -147,7 +141,12 @@ export const setCrashRecord = data => {
       db,
       `Legko/crash/records/${data.year}/${data.month}/${data.id}/` + data.day
     ),
-    data.status
+    {
+      status: data.status,
+      redactor: data.redactor,
+      date: data.date,
+      time: data.time,
+    }
   );
   set(
     ref(db, `Legko/crash/records/${data.year}/${data.month}/${data.id}/area`),
