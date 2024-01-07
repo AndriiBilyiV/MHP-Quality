@@ -99,3 +99,17 @@ export const OptionLinkAdmin = styled(Link)`
     transition: background-color 200ms linear;
   }
 `;
+
+export const TextArea = styled(Field)`
+  resize: none;
+  outline: transparent;
+  width: 87%;
+  font-size: 18px;
+  padding: 8px;
+  margin: 18px 0;
+
+  &:focus-visible {
+    outline: ${p => p.theme.theme.colors.medium} 4px solid;
+    transition: outline 200ms linear;
+  }
+`;

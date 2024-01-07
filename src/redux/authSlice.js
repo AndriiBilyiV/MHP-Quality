@@ -4,8 +4,7 @@ import { getUsers, identifyMe, signIn, signOut } from './operations';
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    isIdentify: false,
-    isLoggedIn: false,
+    status: '',
     token: '',
     user: '',
     email: '',
@@ -20,7 +19,13 @@ const authSlice = createSlice({
     builder
       .addCase(signIn.fulfilled, (state, action) => {
         if (action.payload.uid) {
-          state.isLoggedIn = true;
+          console.log(action.payload);
+          state.status = action.payload.status;
+          state.user = action.payload.displayName || action.payload.email;
+          state.email = action.payload.email;
+          state.position = action.payload.position;
+          state.company = action.payload.company;
+          //old code
           state.UID = action.payload.uid;
           state.user = action.payload.displayName || action.payload.email;
           state.email = action.payload.email;
@@ -48,17 +53,17 @@ const authSlice = createSlice({
       })
       .addCase(identifyMe.fulfilled, (state, action) => {
         if (state.usersArray !== null) {
-          state.isIdentify = true;
+          console.log('PAYLOAD', action.payload);
+          state.status = action.payload.status;
+          //old code
           state.position = action.payload.position;
           state.positionDisplay = action.payload.positionDisplay;
           state.company = action.payload.company;
         }
       })
       .addCase(signOut.fulfilled, (state, action) => {
-        state.isIdentify = false;
-        state.isAdmin = false;
-        state.isLoggedIn = false;
         state.user = '';
+        state.status = '';
         state.UID = '';
         state.company = '';
         state.position = '';

@@ -1,5 +1,6 @@
 export const selectIsLoggedIn = state => state.auth.isLoggedIn;
 export const selectUserName = state => state.auth.user;
+export const selectStatus = state => state.auth.status;
 export const selectPosition = state => state.auth.position;
 export const selectPositionDisplay = state => state.auth.positionDisplay;
 export const selectIdentify = state => state.auth.isIdentify;

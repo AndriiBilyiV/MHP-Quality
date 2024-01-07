@@ -26,13 +26,11 @@ export const AddPositionForm = () => {
     <Formik
       initialValues={{
         position: '',
-        positionDisplay: '',
         department: '',
       }}
       onSubmit={(values, action) => {
         const data = {
           position: values.position,
-          positionDisplay: values.positionDisplay,
           department: values.department,
           redactor: email,
           company: company,
@@ -48,8 +46,8 @@ export const AddPositionForm = () => {
             <option value="">Оберіть</option>
             {departmens.map(department => {
               return (
-                <option value={department.department}>
-                  {department.departmentDisplay}
+                <option key={department.id} value={department.department}>
+                  {department.department}
                 </option>
               );
             })}
@@ -57,13 +55,9 @@ export const AddPositionForm = () => {
         </Label>
         <Label>
           Введіть назву нової посади
-          <Input name="positionDisplay" placeholder="Інспектор з якості" />
+          <Input name="position" placeholder="Інспектор з якості" />
         </Label>
-        <Label>
-          Введіть ключ назви нової посади
-          <Input name="position" placeholder="quality-inspector" />
-        </Label>
-        <Button>Підтвердити</Button>
+        <Button type="submit">Підтвердити</Button>
       </StyledForm>
     </Formik>
   );

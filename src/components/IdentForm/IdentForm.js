@@ -9,6 +9,7 @@ import {
   Button,
   Label,
   StyledForm,
+  TextArea,
 } from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
 
 export const IdentForm = () => {
@@ -25,9 +26,12 @@ export const IdentForm = () => {
       initialValues={{
         position: '',
         company: '',
+        comment: '',
       }}
       onSubmit={(values, action) => {
+        console.log(values);
         const data = {
+          status: 'request',
           isAdmin: false,
           isAproved: false,
           user: user,
@@ -37,36 +41,50 @@ export const IdentForm = () => {
             position => position.position === values.position
           ).positionDisplay,
           company: values.company,
+          comment: values.comment,
         };
         dispatch(identifyMe(data));
         navigate('/home');
       }}
     >
-      <StyledForm>
-        <Label>
-          Оберіть компанію в якій працюєте
-          <Field as="select" name="company">
-            <option value="">Оберіть</option>
-            <option value="Legko">Легко</option>
-            <option value="MPF">МПФ</option>
-            <option value="VPF">ВПФ</option>
-          </Field>
-        </Label>
-        <Label>
-          Оберіть Вашу посаду
-          <Field as="select" name="position">
-            <option value="">Оберіть</option>
-            {positions.map(position => {
-              return (
-                <option key={position.position} value={position.position}>
-                  {position.positionDisplay}
-                </option>
-              );
-            })}
-          </Field>
-        </Label>
-        <Button type="submit">OK</Button>
-      </StyledForm>
+      {({ setFieldValue }) => (
+        <StyledForm>
+          <Label>
+            Оберіть компанію в якій працюєте
+            <Field as="select" name="company">
+              <option value="">Оберіть</option>
+              <option value="Legko">Легко</option>
+              <option value="MPF">МПФ</option>
+              <option value="VPF">ВПФ</option>
+            </Field>
+          </Label>
+          <Label>
+            Оберіть Вашу посаду
+            <Field as="select" name="position">
+              <option value="">Оберіть</option>
+              {positions.map(position => {
+                return (
+                  <option key={position.position} value={position.position}>
+                    {position.positionDisplay}
+                  </option>
+                );
+              })}
+            </Field>
+          </Label>
+          <Label>
+            Якщо Вашої посади ще немає в списку, або Вам потрібно надати
+            додаткову інформацію адміністратору повідомте це в полі нижче
+            <TextArea
+              as="textarea"
+              name="comment"
+              rows="5"
+              cols="40"
+              onChange={e => setFieldValue('comment', e.target.value)}
+            ></TextArea>
+          </Label>
+          <Button type="submit">Надіслати запит</Button>
+        </StyledForm>
+      )}
     </Formik>
   );
 };

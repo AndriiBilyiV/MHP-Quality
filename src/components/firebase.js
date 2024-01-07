@@ -15,6 +15,7 @@ import {
   signOut,
   // onAuthStateChanged,
 } from 'firebase/auth';
+import { nanoid } from 'nanoid';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAdMNQTsdWPlbiUWz1y9-92hZLDbKQHUBE',
@@ -38,7 +39,9 @@ export const userSignIn = async () => {
   const response = await signInWithPopup(auth, provider)
     .then(result => result.user)
     .catch(err => err);
-  return response;
+  const users = await getAllUsers();
+
+  return { user: response, users: users };
 };
 export const userSignOut = async () => {
   const response = await signOut()
@@ -56,10 +59,6 @@ export const getAllUsers = async () => {
     .catch(err => console.log(err));
   return users;
 };
-
-export const insertDataRecord = data => {
-  set(ref(db, 'Legko/crash/records'), data);
-};
 export const idetifyUser = async data => {
   const users = await getAllUsers();
   if (users === null) {
@@ -74,42 +73,46 @@ export const idetifyUser = async data => {
   }
 };
 export const getAllDepartments = async company => {
-  const departmens = await get(child(ref(db), `${company}/departments`))
+  const response = await get(child(ref(db), `${company}/departments`))
     .then(res => res.val())
     .catch(err => console.log(err));
-  return departmens;
-};
-export const setDepartment = async data => {
-  const departmens = await getAllDepartments(data.company);
-  if (departmens === null) {
-    set(ref(db, `${data.company}/departments`), [data]);
-    return;
-  } else if (
-    !departmens.find(
-      departmen => departmen.departmentDisplay === data.departmentDisplay
-    )
-  ) {
-    set(ref(db, `${data.company}/departments`), [...departmens, data]);
+  if (response && typeof response === 'object') {
+    const departments = Object.entries(response).map(item => item[1]);
+    return departments;
   }
 };
+export const setDepartment = async data => {
+  const departments = await getAllDepartments(data.company);
+
+  if (departments) {
+    if (
+      departments.find(department => department.department === data.department)
+    ) {
+      alert('same');
+      return;
+    }
+  }
+  set(ref(db, `${data.company}/departments/` + data.id), data);
+};
 export const getAllPositions = async company => {
-  const positions = await get(child(ref(db), `${company}/positions`))
+  const response = await get(child(ref(db), `${company}/positions`))
     .then(res => res.val())
     .catch(err => console.log(err));
-  return positions;
+  if (response && typeof response === 'object') {
+    const positions = Object.entries(response).map(item => item[1]);
+    return positions;
+  }
 };
 export const setPosition = async data => {
   const positions = await getAllPositions(data.company);
-  if (positions === null) {
-    set(ref(db, `${data.company}/positions`), [data]);
-    return;
-  } else if (
-    !positions.find(
-      position => position.positionDisplay === data.positionDisplay
-    )
-  ) {
-    set(ref(db, `${data.company}/positions`), [...positions, data]);
+  if (positions) {
+    if (positions.find(position => position.position === data.position)) {
+      alert('same');
+      return;
+    }
   }
+
+  set(ref(db, `${data.company}/positions/` + nanoid()), data);
 };
 export const getAllAreas = async company => {
   const areas = await get(child(ref(db), `${company}/areas`))

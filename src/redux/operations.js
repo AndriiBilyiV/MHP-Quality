@@ -19,10 +19,14 @@ export const getUsers = createAsyncThunk('auth/getUsers', async () => {
 export const signIn = createAsyncThunk('auth/signIn', async () => {
   try {
     const response = await userSignIn();
+    const temp = response.users.find(user => user.user === response.user.uid);
     const result = {
-      uid: response.uid,
-      displayName: response.displayName,
-      email: response.email,
+      status: temp ? temp.status : 'unknown',
+      uid: response.user.uid,
+      displayName: temp ? temp.userName : response.user.displayName,
+      email: response.user.email,
+      position: temp ? temp.positionDisplay : '',
+      company: temp ? temp.company : '',
     };
     return result;
   } catch (err) {

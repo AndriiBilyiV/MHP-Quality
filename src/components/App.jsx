@@ -2,19 +2,20 @@ import { AddArea } from 'pages/AddArea';
 import { AddDepartment } from 'pages/AddDepartment';
 import { AddPosition } from 'pages/AddPosition';
 import { AllUsers } from 'pages/AllUsers';
+import { Aprove } from 'pages/Aprove';
 import { CheckCrash } from 'pages/CheckCrash';
 import { CrashView } from 'pages/CrasfView';
+import { FirstTime } from 'pages/FirstTime';
 import { Home } from 'pages/Home';
+import { NotAproved } from 'pages/NotAproved';
+import { Register } from 'pages/Register';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { getUsers } from '../redux/operations';
-import { AdminRoute } from './AdminRoute';
 import { getAllUsers } from './firebase';
 import { Layout } from './Layout/Layout.styled';
-import { PrivateRoute } from './PrivatRoute';
-import { RedirectIndex } from './RedirectIndex';
-import { RestrictedRoute } from './RestrictedRoute';
+import { StatusRoute, UserRoute, AdminRoute, IndexRoute } from './StatusRoute';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -25,35 +26,49 @@ export const App = () => {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<RedirectIndex />} />
+        <Route path="/" element={<IndexRoute />} />
         <Route
           path="/register"
-          element={<RestrictedRoute redirectTo="/home" />}
+          element={
+            <StatusRoute
+              details={{
+                default: <Register />,
+                unknown: <FirstTime />,
+                request: <NotAproved />,
+                user: <Navigate to="/home" />,
+                admin: <Navigate to="/home" />,
+              }}
+            />
+          }
         />
-        <Route path="/home" element={<PrivateRoute component={<Home />} />} />
+        <Route path="/home" element={<UserRoute Component={<Home />} />} />
         <Route
           path="/add-department"
-          element={<AdminRoute component={<AddDepartment />} />}
+          element={<AdminRoute Component={<AddDepartment />} />}
+        />
+        <Route
+          path="/user-requests"
+          element={<AdminRoute Component={<Aprove />} />}
         />
         <Route
           path="/all-users"
-          element={<AdminRoute component={<AllUsers />} />}
+          element={<AdminRoute Component={<AllUsers />} />}
         />
         <Route
           path="/add-position"
-          element={<AdminRoute component={<AddPosition />} />}
+          element={<AdminRoute Component={<AddPosition />} />}
         />
         <Route
           path="/add-area"
-          element={<AdminRoute component={<AddArea />} />}
+          element={<AdminRoute Component={<AddArea />} />}
         />
         <Route
           path="/crash"
-          element={<PrivateRoute component={<CheckCrash />} />}
+          element={<UserRoute Component={<CheckCrash />} />}
         />
         <Route
           path="/crash/table"
-          element={<PrivateRoute component={<CrashView />} />}
+          element={<UserRoute Component={<CrashView />} />}
         />
       </Routes>
     </Layout>

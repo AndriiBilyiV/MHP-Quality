@@ -13,7 +13,7 @@ export const Home = () => {
       <HomeLogoLink />
       <UserInfo />
       {isAdmin ? (
-        <OptionLinkAdmin to="/add-department">
+        <OptionLinkAdmin to="/user-requests">
           Заявки користувачів
         </OptionLinkAdmin>
       ) : null}

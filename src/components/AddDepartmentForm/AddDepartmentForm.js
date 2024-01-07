@@ -6,21 +6,8 @@ import {
 import { setDepartment } from 'components/firebase';
 import { Form, Formik } from 'formik';
 import { useAuth } from 'hooks/useAuth';
+import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
-
-const validationSchema = Yup.object().shape({
-  department: Yup.string()
-    .min(3, 'Мінімум 3 символи')
-    .matches(
-      /^[a-zA-Z-]+$/,
-      'Допускаються тільки букви латинського алфавіту та дефізи'
-    )
-    .required("Обов'язково заповнити"),
-  departmentDisplay: Yup.string()
-    .min(3, 'Мінімум 3 символи')
-    .required("Обов'язково заповнити"),
-});
 
 export const AddDepartmentForm = () => {
   const { email, company } = useAuth();
@@ -29,15 +16,13 @@ export const AddDepartmentForm = () => {
     <Formik
       initialValues={{
         department: '',
-        departmentDisplay: '',
       }}
-      validationSchema={validationSchema}
       onSubmit={(values, action) => {
         const data = {
           department: values.department,
-          departmentDisplay: values.departmentDisplay,
           redactor: email,
           company: company,
+          id: nanoid(),
         };
         setDepartment(data);
         navigate('/home');
@@ -46,13 +31,9 @@ export const AddDepartmentForm = () => {
       <Form>
         <Label>
           Введіть назву нового підрозділу
-          <Input name="departmentDisplay" placeholder="Відділ якості" />
+          <Input name="department" placeholder="Відділ якості" />
         </Label>
-        <Label>
-          Введіть ключ назви нового підрозділу
-          <Input name="department" placeholder="quality" />
-        </Label>
-        <Button>Підтвердити</Button>
+        <Button type="submit">Підтвердити</Button>
       </Form>
     </Formik>
   );

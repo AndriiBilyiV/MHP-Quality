@@ -7,12 +7,14 @@ import {
   selectIsLoggedIn,
   selectPosition,
   selectPositionDisplay,
+  selectStatus,
   selectUser,
   selectUserName,
   selectUsersArray,
 } from '../redux/selectors';
 
 export const useAuth = () => {
+  const status = useSelector(selectStatus);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userName = useSelector(selectUserName);
   const userPosition = useSelector(selectPosition);
@@ -25,6 +27,7 @@ export const useAuth = () => {
   const usersArray = useSelector(selectUsersArray);
 
   return {
+    status,
     isLoggedIn,
     userName,
     userPosition,
