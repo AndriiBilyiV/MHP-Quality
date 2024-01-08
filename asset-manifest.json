@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/MHP-Quality/static/js/main.a3804663.js",
+    "main.js": "/MHP-Quality/static/js/main.945f3245.js",
     "static/media/MHP_logo.png": "/MHP-Quality/static/media/MHP_logo.62cb87b55c054c8964ab.png",
     "index.html": "/MHP-Quality/index.html",
-    "main.a3804663.js.map": "/MHP-Quality/static/js/main.a3804663.js.map"
+    "main.945f3245.js.map": "/MHP-Quality/static/js/main.945f3245.js.map"
   },
   "entrypoints": [
-    "static/js/main.a3804663.js"
+    "static/js/main.945f3245.js"
   ]
 }
