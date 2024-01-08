@@ -5,7 +5,7 @@ import {
   StyledForm,
 } from 'components/DefoultStyledComponetns/DefoultStyledComponetns';
 import { getAllPositions } from 'components/firebase';
-import { Field, Form, Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import { useAuth } from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
